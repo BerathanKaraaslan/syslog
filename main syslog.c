@@ -2,17 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Baðlý liste düðümü yapýsý
+// Bagli liste dugumu yapisi
 typedef struct Node {
     char log_entry[1024];   // Syslog girdisini tutacak alan
-    struct Node *next;      // Sonraki düðüme iþaretçi
+    struct Node *next;      // Sonraki dugume isaretci
 } Node;
 
-// Baðlý listeyi baþlatma
+// Yeni bir dugum olusturma fonksiyonu
 Node* create_node(const char* log_entry) {
     Node* new_node = (Node*)malloc(sizeof(Node));
     if (new_node == NULL) {
-        printf("Bellek ayýrma hatasý!\n");
+        printf("Bellek ayirma hatasi!\n");
         return NULL;
     }
     strncpy(new_node->log_entry, log_entry, sizeof(new_node->log_entry));
@@ -20,7 +20,7 @@ Node* create_node(const char* log_entry) {
     return new_node;
 }
 
-// Baðlý listeye yeni bir düðüm ekleme
+// Bagli listeye yeni bir dugum ekleme fonksiyonu
 void append(Node** head, const char* log_entry) {
     Node* new_node = create_node(log_entry);
     if (*head == NULL) {
@@ -34,7 +34,7 @@ void append(Node** head, const char* log_entry) {
     }
 }
 
-// Baðlý listeyi yazdýrma
+// Bagli listeyi yazdirma fonksiyonu
 void print_list(Node* head) {
     Node* temp = head;
     while (temp != NULL) {
@@ -43,7 +43,7 @@ void print_list(Node* head) {
     }
 }
 
-// Belleði temizleme
+// Bellek temizleme fonksiyonu
 void free_list(Node* head) {
     Node* temp;
     while (head != NULL) {
@@ -53,11 +53,11 @@ void free_list(Node* head) {
     }
 }
 
-// Syslog dosyasýný okuma
+// Syslog dosyasini okuma fonksiyonu
 void read_syslog(const char* filepath, Node** head) {
     FILE* file = fopen(filepath, "r");
     if (file == NULL) {
-        printf("Dosya açýlamadý: %s\n", filepath);
+        printf("Dosya acilamadi: %s\n", filepath);
         return;
     }
 
@@ -72,15 +72,16 @@ void read_syslog(const char* filepath, Node** head) {
 int main() {
     Node* syslog_list = NULL;
 
-    // Syslog dosyasýný oku ve baðlý listeye ekle
+    // Syslog dosyasini oku ve bagli listeye ekle
     read_syslog("/var/log/syslog", &syslog_list);
 
-    // Baðlý listeyi yazdýr
-    printf("Syslog Entries:\n");
+    // Bagli listeyi yazdir
+    printf("Syslog Girdileri:\n");
     print_list(syslog_list);
 
-    // Belleði temizle
+    // Bellek temizleme
     free_list(syslog_list);
 
     return 0;
 }
+
