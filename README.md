@@ -74,10 +74,4 @@ Program, `/var/log/syslog` dosyasını okuyarak her satırı bir **bağlı liste
 - **`printList(struct Node *head)`** → Syslog kayıtlarını ekrana yazdırır.  
 - **`freeList(struct Node *head)`** → Bellek sızıntısını önlemek için listeyi temizler.  
 
----
 
-## 🚀 Kurulum ve Çalıştırma
-
-### 📥 1. Derleme
-```bash
-gcc syslog_linked_list.c -o syslog_reader
